@@ -61,17 +61,6 @@ function playRound(playerSelection, computerSelection) {
 // const scoreBoard = document.querySelector('.score-board');
 
 function game(playerSelect) {
-    // scoreDiv.textContent = `[ 0 : 0 ]`;
-
-    // for (let i = 0; i < 5; i++) {
-    //     const playerSelection = prompt(`Type in rock, paper, or scissors. Or take a chance!`);
-    //     const computerSelection = computerPlay();
-
-    // console.log(playRound(playerSelection, computerSelection));
-    // console.log(`Score {Player: ${score[0]} Computer: ${score[1]}}`);
-    //     // scoreDiv.textContent = `[ ${score[0]} : ${score[1]} ]`;
-    // }
-
     const playerSelection = playerSelect;
     const computerSelection = computerPlay();
 
@@ -80,23 +69,33 @@ function game(playerSelect) {
     document.querySelector('.message0').innerHTML = message[0];
     document.querySelector('.message1').innerHTML = message[1];
 
-    // ${message}
     if (score[0] === 5 || score[1] === 5) {
         stopGame();
     }
-    // if (score[0] > score[1]) {
-    //     console.log(`Player Wins the Game!!!`);
-    // } else if (score[0] < score[1]) {
-    //     console.log(`Player Loses the Game! Try again!`);
-    // } else if (score[0] === score[1]) {
-    //     console.log(`TIE!!! Tough Game! Try again!`);
-    // }
-    // console.log(`Score {Player: ${score[0]} Computer: ${score[1]}}`);
 }
 
-const stopGame = function () {};
+const stopGame = function () {
+    let finalMessage = '';
+    if (score[0] > score[1]) {
+        finalMessage = `Player Wins the Game!!!`;
+    } else if (score[0] < score[1]) {
+        finalMessage = `Player Loses the Game!`;
+    } else if (score[0] === score[1]) {
+        finalMessage = `TIE!!! Tough Game!`;
+    }
+    console.log(`Score {Player: ${score[0]} Computer: ${score[1]}}`);
+    document.querySelector('.message0').textContent = finalMessage;
+    removeButtons();
+    tryAgainBtn();
+};
 
-const reset = function () {};
+// const reset = function () {
+//     score = [0, 0];
+
+// };
+
+// const resetBtn = document.querySelector('.again');
+// resetBtn.addEventListener('click', reset);
 
 //Button
 const playBtn = document.querySelector('.btn-play');
@@ -116,6 +115,18 @@ const createButtons = function (name) {
     btn.appendChild(btnIcon);
 
     return btn;
+};
+
+const removeButtons = function () {
+    const btns = document.querySelectorAll('.btn-game');
+    btns.forEach((btn) => buttonsDiv.removeChild(btn));
+
+    // buttonsDiv.
+};
+
+const tryAgainBtn = function () {
+    const tryBtnHTML = `<button class='btn again'>Try Again!</button>`;
+    buttonsDiv.insertAdjacentHTML('afterbegin', tryBtnHTML);
 };
 
 const appendChildren = (parent, children) => {

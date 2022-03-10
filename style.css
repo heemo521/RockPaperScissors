@@ -35,7 +35,6 @@ body {
 .btn:hover {
     cursor: pointer;
     background-color: rgba(210, 210, 240);
-    border: 2px #0f0f0f solid;
 }
 
 h1 {
