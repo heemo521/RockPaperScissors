@@ -9,6 +9,8 @@ const data = {
 
 const score = [0, 0];
 
+const container = document.querySelector('.container');
+
 function computerPlay() {
     const computer = Math.round(Math.random() * (3 - 1) + 1);
 
@@ -19,9 +21,9 @@ function playRound(playerSelection, computerSelection) {
     const playerSelect = String(playerSelection).toUpperCase();
     const computerSelect = computerSelection.toUpperCase();
 
-    const winnerMsg = `You Win! ${playerSelect} beats ${computerSelect}!`;
-    const loserMsg = `You Lose! ${computerSelect} beats ${playerSelect}!`;
-    const tieMsg = `It's a Tie!! ${playerSelect} = ${computerSelect}!`;
+    const winnerMsg = `You Win!+${playerSelect} beats ${computerSelect}!`;
+    const loserMsg = `You Lose!+${computerSelect} beats ${playerSelect}!`;
+    const tieMsg = `It's a Tie!!+${playerSelect} = ${computerSelect}!`;
 
     let playerWins = false;
 
@@ -41,9 +43,10 @@ function playRound(playerSelection, computerSelection) {
         if (computerSelect === 'PAPER') {
             playerWins = true;
         }
-    } else {
-        return `UserInput: ${playerSelect}. This is not a valid input. Please try again.`;
     }
+    // else {
+    //     return `UserInput: ${playerSelect}. This is not a valid input. Please try again.`;
+    // }
 
     const scoreKeeper = playerWins ? 0 : 1;
     score[scoreKeeper] += 1;
@@ -70,6 +73,12 @@ function game(playerSelect) {
     const computerSelection = computerPlay();
 
     console.log(playRound(playerSelection, computerSelection));
+    const message = playRound(playerSelection, computerSelection).split('+');
+
+    document.querySelector('.message0').textContent = message[0];
+    document.querySelector('.message1').textContent = message[1];
+
+    // ${message}
 
     // if (score[0] > score[1]) {
     //     console.log(`Player Wins the Game!!!`);
@@ -95,8 +104,6 @@ const createButtons = function (name) {
     const btnIcon = document.createElement('i');
     btnIcon.classList.add(`far`);
     btnIcon.classList.add(`fa-hand-${name}`);
-
-    //Styling here!!!!
 
     btn.appendChild(btnIcon);
 
@@ -137,11 +144,16 @@ const scoreBoard = function (score) {
             <p class=scores>*Player: ${score[0]} Computer: ${score[1]}*</p>
         </div>`;
     const title = document.querySelector('.title');
-    const container = document.querySelector('.container');
 
     if (title) container.removeChild(title);
 
+    const winOrLoseHTML = `
+    <h2 class='message0'></h2>
+    <h3 class='message1'></h3>
+    `;
+
     container.insertAdjacentHTML('afterbegin', scoreBoardHTML);
+    container.insertAdjacentHTML('afterbegin', winOrLoseHTML);
 };
 
 playBtn.addEventListener('click', playDisplay);
