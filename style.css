@@ -67,3 +67,7 @@ h1 {
 i {
     transform: scale(2);
 }
+
+.message1 {
+    word-spacing: 1rem;
+}

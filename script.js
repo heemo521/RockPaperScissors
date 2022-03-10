@@ -18,12 +18,15 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    const playerSelect = String(playerSelection).toUpperCase();
-    const computerSelect = computerSelection.toUpperCase();
+    const playerSelect = String(playerSelection).toLowerCase();
+    const computerSelect = computerSelection.toLowerCase();
 
-    const winnerMsg = `You Win!+${playerSelect} beats ${computerSelect}!`;
-    const loserMsg = `You Lose!+${computerSelect} beats ${playerSelect}!`;
-    const tieMsg = `It's a Tie!!+${playerSelect} = ${computerSelect}!`;
+    const btnIconP = `<i class="far fa-hand-${playerSelect}"></i>`;
+    const btnIconC = `<i class="far fa-hand-${computerSelect}"></i>`;
+
+    const winnerMsg = `You Win!+${btnIconP} beats ${btnIconC}!`;
+    const loserMsg = `You Lose!+${btnIconC} beats ${btnIconP}!`;
+    const tieMsg = `It's a Tie!!+${btnIconP} = ${btnIconC}!`;
 
     let playerWins = false;
 
@@ -31,16 +34,16 @@ function playRound(playerSelection, computerSelection) {
         return tieMsg;
     }
 
-    if (playerSelect === 'ROCK') {
-        if (computerSelect === 'SCISSORS') {
+    if (playerSelect === 'rock') {
+        if (computerSelect === 'scissors') {
             playerWins = true;
         }
-    } else if (playerSelect === 'PAPER') {
-        if (computerSelect === 'ROCK') {
+    } else if (playerSelect === 'paper') {
+        if (computerSelect === 'rock') {
             playerWins = true;
         }
-    } else if (playerSelect === 'SCISSORS') {
-        if (computerSelect === 'PAPER') {
+    } else if (playerSelect === 'scissors') {
+        if (computerSelect === 'paper') {
             playerWins = true;
         }
     }
@@ -72,14 +75,15 @@ function game(playerSelect) {
     const playerSelection = playerSelect;
     const computerSelection = computerPlay();
 
-    console.log(playRound(playerSelection, computerSelection));
     const message = playRound(playerSelection, computerSelection).split('+');
 
-    document.querySelector('.message0').textContent = message[0];
-    document.querySelector('.message1').textContent = message[1];
+    document.querySelector('.message0').innerHTML = message[0];
+    document.querySelector('.message1').innerHTML = message[1];
 
     // ${message}
-
+    if (score[0] === 5 || score[1] === 5) {
+        stopGame();
+    }
     // if (score[0] > score[1]) {
     //     console.log(`Player Wins the Game!!!`);
     // } else if (score[0] < score[1]) {
@@ -89,6 +93,10 @@ function game(playerSelect) {
     // }
     // console.log(`Score {Player: ${score[0]} Computer: ${score[1]}}`);
 }
+
+const stopGame = function () {};
+
+const reset = function () {};
 
 //Button
 const playBtn = document.querySelector('.btn-play');
