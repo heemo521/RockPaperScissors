@@ -24,13 +24,13 @@ body {
     gap: 30px;
 }
 
-button {
+.btn {
     padding: 10px 28px;
     border-radius: 10px;
     border: 1px #0f0f0f solid;
 }
 
-button:hover {
+.btn:hover {
     cursor: pointer;
     background-color: rgba(210, 210, 240);
 }
@@ -45,3 +45,10 @@ h1 {
     gap: 15px;
     text-transform: uppercase;
 }
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+
