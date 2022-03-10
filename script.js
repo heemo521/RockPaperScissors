@@ -1,5 +1,4 @@
-//Play image of rock paper scissors and the user needs to click a button within time
-//or loses automatically
+// Refactoring
 
 const data = {
     1: 'Rock',
@@ -83,7 +82,6 @@ const stopGame = function () {
     } else if (score[0] === score[1]) {
         finalMessage = `TIE!!! Tough Game!`;
     }
-    console.log(`Score {Player: ${score[0]} Computer: ${score[1]}}`);
     document.querySelector('.message0').textContent = finalMessage;
     removeButtons();
     tryAgainBtn();
@@ -133,7 +131,7 @@ const buttonClicked = function (e) {
 
     e.stopPropagation();
     const scoreDisplay = document.querySelector('.scores');
-    // console.log(this.dataset.name);
+
     game(this.dataset.name);
     scoreDisplay.textContent = `*Player: ${score[0]} Computer: ${score[1]}*`;
 };
@@ -153,7 +151,6 @@ const playDisplay = function () {
 };
 
 const scoreBoard = function (score) {
-    //    console.log(`Score {Player: ${score[0]} Computer: ${score[1]}}`);
     const scoreBoardHTML = `
         <div class='score-board'>
             <h2>Score Board</h2>
@@ -193,13 +190,6 @@ const reset = function () {
 };
 
 playBtn.addEventListener('click', playDisplay);
-
-// Add a div for displaying results and change all of your console.logs into DOM methods.
-// Display scoreboard
-// UI for score board
-// Move the Title to the top
-// Display the running score, and announce a winner of the game once one player reaches 5 points.
-// Refactoring
 
 // Commit to the new branch
 //Merging to main
