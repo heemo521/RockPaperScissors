@@ -89,14 +89,6 @@ const stopGame = function () {
     tryAgainBtn();
 };
 
-// const reset = function () {
-//     score = [0, 0];
-
-// };
-
-// const resetBtn = document.querySelector('.again');
-// resetBtn.addEventListener('click', reset);
-
 //Button
 const playBtn = document.querySelector('.btn-play');
 const buttonsDiv = document.querySelector('.buttons');
@@ -127,6 +119,9 @@ const removeButtons = function () {
 const tryAgainBtn = function () {
     const tryBtnHTML = `<button class='btn again'>Try Again!</button>`;
     buttonsDiv.insertAdjacentHTML('afterbegin', tryBtnHTML);
+    const resetBtn = document.querySelector('.again');
+
+    resetBtn.addEventListener('click', reset);
 };
 
 const appendChildren = (parent, children) => {
@@ -134,6 +129,8 @@ const appendChildren = (parent, children) => {
 };
 
 const buttonClicked = function (e) {
+    if (!e) return;
+
     e.stopPropagation();
     const scoreDisplay = document.querySelector('.scores');
     // console.log(this.dataset.name);
@@ -145,7 +142,7 @@ const playDisplay = function () {
     const choices = ['rock', 'paper', 'scissors'];
     const gameBtns = choices.map((choice) => createButtons(choice));
 
-    buttonsDiv.removeChild(playBtn);
+    playBtn.classList.add('hide');
     appendChildren(buttonsDiv, gameBtns);
 
     scoreBoard(score);
@@ -171,8 +168,28 @@ const scoreBoard = function (score) {
     <h3 class='message1'></h3>
     `;
 
+    const scoreBoard = document.querySelector('.score-board');
+    const message0 = document.querySelector('.message0');
+    const message1 = document.querySelector('.message1');
+    if (scoreBoard) {
+        container.removeChild(scoreBoard);
+        container.removeChild(message0);
+        container.removeChild(message1);
+    }
+
     container.insertAdjacentHTML('afterbegin', scoreBoardHTML);
     container.insertAdjacentHTML('afterbegin', winOrLoseHTML);
+};
+
+const reset = function () {
+    score[0] = 0;
+    score[1] = 0;
+    // container.removeChild(document.querySelector('.message0'));
+    // container.removeChild(document.querySelector('.message1'));
+    const resetBtn = document.querySelector('.again');
+    resetBtn.classList.toggle('hide');
+    playDisplay();
+    buttonClicked();
 };
 
 playBtn.addEventListener('click', playDisplay);

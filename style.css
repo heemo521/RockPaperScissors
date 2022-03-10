@@ -70,3 +70,7 @@ i {
 .message1 {
     word-spacing: 1rem;
 }
+
+.hide {
+    display: none;
+}
