@@ -1,3 +1,6 @@
+//Play image of rock paper scissors and the user needs to click a button within time
+//or loses automatically
+
 const data = {
     1: 'Rock',
     2: 'Paper',
@@ -67,7 +70,6 @@ function game(playerSelect) {
     const computerSelection = computerPlay();
 
     console.log(playRound(playerSelection, computerSelection));
-    console.log(`Score {Player: ${score[0]} Computer: ${score[1]}}`);
 
     // if (score[0] > score[1]) {
     //     console.log(`Player Wins the Game!!!`);
@@ -105,6 +107,14 @@ const appendChildren = (parent, children) => {
     children.forEach((child) => parent.appendChild(child));
 };
 
+const buttonClicked = function (e) {
+    e.stopPropagation();
+    const scoreDisplay = document.querySelector('.scores');
+    // console.log(this.dataset.name);
+    game(this.dataset.name);
+    scoreDisplay.textContent = `*Player: ${score[0]} Computer: ${score[1]}*`;
+};
+
 const playDisplay = function () {
     const choices = ['rock', 'paper', 'scissors'];
     const gameBtns = choices.map((choice) => createButtons(choice));
@@ -112,34 +122,41 @@ const playDisplay = function () {
     buttonsDiv.removeChild(playBtn);
     appendChildren(buttonsDiv, gameBtns);
 
-    // const activateBtns = document.querySelectorAll('btn-game');
-    // console.log(activateBtns);
+    scoreBoard(score);
+
     gameBtns.forEach((gameBtn) => {
-        gameBtn.addEventListener(
-            'click',
-            function (e) {
-                e.stopPropagation();
-                console.log(this.dataset.name);
-                game(this.dataset.name);
-            },
-            { capture: true }
-        );
+        gameBtn.addEventListener('click', buttonClicked, { capture: true });
     });
+};
+
+const scoreBoard = function (score) {
+    //    console.log(`Score {Player: ${score[0]} Computer: ${score[1]}}`);
+    const scoreBoardHTML = `
+        <div class='score-board'>
+            <h2>Score Board</h2>
+            <p class=scores>*Player: ${score[0]} Computer: ${score[1]}*</p>
+        </div>`;
+    const title = document.querySelector('.title');
+    const container = document.querySelector('.container');
+
+    if (title) container.removeChild(title);
+
+    container.insertAdjacentHTML('afterbegin', scoreBoardHTML);
 };
 
 playBtn.addEventListener('click', playDisplay);
 
-// In our UI, the player should be able to play the game by clicking on buttons rather than typing their answer in a prompt.
-
-// Create three buttons, one for each selection. Add an event listener to the buttons that call your playRound function with the correct playerSelection every time a button is clicked. (you can keep the console.logs for this step)
 // Add a div for displaying results and change all of your console.logs into DOM methods.
+// Display scoreboard
+// UI for score board
+// Move the Title to the top
 // Display the running score, and announce a winner of the game once one player reaches 5 points.
-// You will likely have to refactor (rework/rewrite) your original code to make it work for this. That’s OK! Reworking old code is an important part of a programmer’s life.
-// Once you’re all done with your UI and made sure everything’s satisfactory, commit your changes to the rps-ui branch.
-// Now let’s take a look at how we can merge the changes from our rps-ui branch back to our main branch.
-// Checkout the branch we want to merge INTO i.e. main with the command git checkout main.
-// Now let’s merge our rps-ui branch into main, our current branch, with git merge rps-ui.
-// If everything goes fine, our rps-ui branch is now successfully merged with main! Use git log and you’ll see all the commits you’ve made to your feature branch on top of the commits you made to the main branch. Now for our final step!
-// Let’s push our main branch into our remote repo by running git push origin main . Go to your Github repo and you’ll see that our main branch will have all the changes and commits you made to the rps-ui branch. Congratulations! You’ve successfully pushed your first feature into your production branch!
-// Now that we have all our code in the main branch, we don’t really need our rps-ui branch anymore. Let’s do some cleanup, both locally and in the remote repo. Delete the branch from our local repo with git branch -d rps-ui and also delete it from the remote repo on Github with git push --delete origin rps-ui. Congrats, we’re all done with our cleanup!
-// Make sure to publish the project on GitHub Pages and add a live preview link in the project lesson.
+// Refactoring
+
+// Commit to the new branch
+//Merging to main
+//Check with git log
+//Push main - git push origin main .
+//Verify on gitHub
+//  Delete the branch from our local repo with git branch -d rps-ui and also delete it from the remote repo on Github with git push --delete origin rps-ui. Congrats, we’re all done with our cleanup!
+// Publish the project on GitHub Pages and add a live preview link in the project lesson.

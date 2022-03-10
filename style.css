@@ -10,10 +10,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .container {
-    border: 5px darkgrey solid;
+    border: 5px rgb(163, 140, 140) solid;
+    border-radius: 50px;
     background-color: rgba(210, 210, 240, 0.5);
     width: 500px;
     height: 500px;
@@ -33,6 +35,7 @@ body {
 .btn:hover {
     cursor: pointer;
     background-color: rgba(210, 210, 240);
+    border: 2px #0f0f0f solid;
 }
 
 h1 {
@@ -42,8 +45,14 @@ h1 {
 
 .score-board {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 15px;
     text-transform: uppercase;
+    border: 5px darkslategrey solid;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .buttons {
@@ -51,4 +60,10 @@ h1 {
     gap: 20px;
 }
 
+.btn-game {
+    padding: 12px 24px;
+}
 
+i {
+    transform: scale(2);
+}
